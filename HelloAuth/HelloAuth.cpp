@@ -3,15 +3,15 @@
 
 using namespace eosio;
 
-class HelloAuth : public eosio::contract {
-    public:
-    using contract::contract;
+class hello : public contract {
+public:
+  using contract::contract;
 
-    /// @abi action
-    void hello(const name user){
-        require_auth(user);
-        print("Hello, ", name{user});
-    }
+  [[eosio::action]]
+  void hi(account_name user){
+    require_auth(user);
+    print("Hello, ", name{user});
+  }
 };
+EOSIO_ABI(hello, (hi))
 
-EOSIO_ABI(HelloAuth, (hello))
